@@ -13,7 +13,9 @@
   const userTask = taskInput.value
 
   //put the user input into the list
+  // this element is a parent to hold both the text and the delete button
   const newTaskElement = document.createElement('li')
+  // you have to create a separate child element just for the text so that when we edit the text it does not also affect the button
   const taskText = document.createElement('span');
   const newExitButton = document.createElement('button')
   taskText.textContent = userTask
@@ -35,21 +37,20 @@
   taskEditp.append(newTaskEdit)
     // nest a function within the nested function
      function enterEdit(event) {
+    // this tells the keyup listener event what key to listen for
       if (event.key === 'Enter') {
+    // grab the new text
       const userEdit = newTaskEdit.value
-    // first make the text visible again
+    // then make the text element visible again
       newTaskElement.style.display = ''
-    // then add in the updated text while still preserving the exit button 
+    // then add the new text into the now visible text element JUST THE TEXT PART!  this will still preserve the old exit button 
       newTaskElement.firstChild.textContent = userEdit
-    // FINALLY REMOVE THE ENTIRE DIV CREATED to contain the INPUT BOX (remove input box)
+    // FINALLY REMOVE THE ENTIRE DIV CREATED to contain the INPUT BOX (remove input box) so we can see our edits
       taskEditp.remove()
      }}
 
 
     newTaskEdit.addEventListener("keyup", enterEdit)
-      // remove input 
-      // newTaskElement.style.display = ''
-      // add enter key event listener
 
   }
 
